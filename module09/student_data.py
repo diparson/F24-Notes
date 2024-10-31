@@ -51,6 +51,21 @@ def female_records(data):
                     continue
 
 
+def last_name_ends_with(data, lname_ends):
+    file_name = f'last_name_ends_{lname_ends}.csv'
+    with open(file_name, mode='wt', encoding='utf-8') as out_file:
+        print(f'Writing to file {file_name}')
+        for rec in data:
+            if rec.startswith('id'):
+                out_file.write(rec + '\n')
+            else:
+                parts = rec.split(',')
+                if parts[LAST_NAME].endswith(lname_ends):
+                    out_file.write(rec + '\n')
+                else:
+                    continue
+
+
 def main():
     # Assumes the file is at the root directory
     data_file = 'MOCK_DATA.csv'
@@ -58,6 +73,11 @@ def main():
     print(f'Data file has {len(data)} records')
     # Task 1: Create a file with records whose gender = 'Female'
     female_records(data)
+    # Task 2: Create a file with records whose last name ends with:
+    lname_ends = 'ton'
+    last_name_ends_with(data, lname_ends)
+    lname_ends = 'w'
+    last_name_ends_with(data, lname_ends)
 
 
 if __name__ == '__main__':
