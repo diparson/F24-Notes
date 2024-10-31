@@ -66,6 +66,35 @@ def last_name_ends_with(data, lname_ends):
                     continue
 
 
+def wsu_email_builder(data):
+    """Generate WSU email for each student, 
+        and overwrite the current one and save the rest
+        Format:<first_name><last_name><last_4_ssn>@mail.weber.edu
+        All lower case
+        Ex: 2,Lani,Baukham,lbaukham1@bandcamp.com,Female,869-11-2698
+            2,Lani,Baukham,lanibaukham2698@mail.weber.edu,Female,869-11-2698
+
+    Args:
+        data (lst): CSV records
+    """
+    file_name = f'students_wsu_data.csv'
+    with open(file_name, mode='wt', encoding='utf-8') as out_file:
+        print(f'Writing to file {file_name}')
+        for rec in data:
+            if rec.startswith('id'):
+                out_file.write(rec + '\n')
+            else:
+                parts = rec.split(',')
+                # 1) Build new email
+                wsu_email = parts[FIRST_NAME].lower() + parts[LAST_NAME].lower() + parts[SSN][-4:] + '@mail.weber.edu'
+                # 2) Overwrite the email field
+                # print(f'Original email[{parts[EMAIL]}], new email[{wsu_email}]')
+                parts[EMAIL] = wsu_email
+                # 3) Write the record to the file
+                separator = ','
+                out_file.write(separator.join(parts) + '\n')
+
+
 def main():
     # Assumes the file is at the root directory
     data_file = 'MOCK_DATA.csv'
@@ -78,6 +107,8 @@ def main():
     last_name_ends_with(data, lname_ends)
     lname_ends = 'w'
     last_name_ends_with(data, lname_ends)
+    # Task 3: Generate new emails
+    wsu_email_builder(data)
 
 
 if __name__ == '__main__':
