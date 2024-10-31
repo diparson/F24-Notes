@@ -2,6 +2,13 @@ import string
 
 # Read CSV file with student information
 
+ID = 0
+FIRST_NAME = 1
+LAST_NAME = 2
+EMAIL = 3
+GENDER = 4
+SSN = 5
+
 
 def read_data(file_name):
     """Open CSV file with data and returns it as a list
@@ -13,7 +20,7 @@ def read_data(file_name):
         lst: Data from file
     """
     data = []
-    with open(file_name) as in_file:
+    with open(file_name, mode='rt', encoding='utf-8') as in_file:
         for rec in in_file:
             # Remove extra '\n' character
             # print(f'record [{rec.strip()}]')
@@ -22,85 +29,26 @@ def read_data(file_name):
     return data
 
 
-def first_name_analysis(data, initial):
-    """Count number of first names that begin
-       with a given initial 
-
-    Args:
-        data (lst): data list
-        initial (str): Initial to filter data by
-
-    Returns:
-        int: number of matches
-    """
-    total = 0
-    for row in data:  # Loop over rows
-        columns = row.split(',')  # use a comma to split record
-        # print(columns[1])  # Index 1 is first_name
-        # slice the str to take only first char
-        if initial == columns[1][0:1]:
-            total += 1
-        # for colum in columns: # Loop over columns
-        #     print(colum)
-
-    return total
-
-
-def first_name_analysis_all(data):
-    total = 0
-    results = {}  # store letter and total
-    ascii_letters = string.ascii_uppercase  # get all ASCII values uppercase
-    for letter in ascii_letters:
-        total = first_name_analysis(data, letter)
-        print(f'For {letter}, {total} records')
-        results[letter] = total
-
-    return results
-
-
-def print_first_name_stats(totals):
-    # Print Highest Occurrence
-    letter = max(totals, key=totals.get)  # get highest value key
-    print(f'Highest letter is {letter} with total of {totals[letter]}')
-    # Print Lowest Occurrence
-    letter = min(totals, key=totals.get)  # get highest value key
-    print(f'Lowest letter is {letter} with total of {totals[letter]}')
-
-
-def gender_analysis_all(data):
-    """Run statistics for the gender column (4 col) 
-
-    Args:
-        data (lst): Data records
-
-    Returns:
-        dict: Gender as the key, and total as the value
-
-    Note: For NUll entries, use 'na'
-    """
-    results = {}
-    for row in data[1:]:  # loop over row, excluding header
-        columns = row.split(',')
-        if columns[4] == '':  # empty
-            key = 'NA'
-        else:
-            key = columns[4]
-
-        if key in results:    # populate dict
-            results[key] += 1
-        else:
-            results[key] = 1
-    return results
-
-
 def female_records(data):
-    # Open file for writing
-    # First records SHOULD be the header
-    # Make sure you close the file
-    pass
-
-# Starting Point
-# Program "Driver"
+    """Create a file with records whose records are gender = 'Female'
+    Args: data (lst): Data of csv records
+    """
+    # 1) Open file for writing using 'with'
+    file_name = 'female_records.csv'
+    with open(file_name, mode='wt', encoding='utf-8') as out_file:
+        print(f'Writing to file {file_name}')
+        # Loop over all records and save only those
+        for rec in data:
+            # 2) Write the header
+            if rec.startswith('id'):
+                out_file.write(rec + '\n')
+            else:
+                parts = rec.split(',')
+                # Save only records with Female as gender
+                if parts[GENDER] == 'Female':
+                    out_file.write(rec + '\n')
+                else:
+                    continue
 
 
 def main():
@@ -109,6 +57,7 @@ def main():
     data = read_data(data_file)
     print(f'Data file has {len(data)} records')
     # Task 1: Create a file with records whose gender = 'Female'
+    female_records(data)
 
 
 if __name__ == '__main__':
