@@ -1,4 +1,4 @@
 
-# Module notes
+# Module 10 Notes: List and Dictionaries
 
-Use this file for your notes.
+In this module, we will continue our discussion for `List` and `Dictionaries`
