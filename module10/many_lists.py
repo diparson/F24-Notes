@@ -19,13 +19,15 @@ def add_students(students, number):
 
 
 def add_student_id(student_id):
-    student_info = {}  # student info, 'id' and 'scores'
+    student_info = {}  # student info, 'id'
     student_info['id'] = student_id  # add student ID to dictionary
     return student_info
 
 
 def add_quiz_scores(student_info, scores):
     for number in range(1, scores + 1):
+        # TODO: Need to find a way to get the last quiz number key
+        # and go from there.  This will allow for multiple quizzes
         quiz_id = f'quiz{number}'
         # Random quiz scores as values between 50 and 100 based on scores input
         student_info[quiz_id] = random.randint(50, 100)
