@@ -25,6 +25,17 @@ def set_student_quizzes(student_records, number_quizzes):
             record['quizzes'].append(random.randint(50, 100))
 
 
+def calculate_quiz_average(student_records):
+    # Create a new key 'quiz_average' in each dictionary
+    for record in student_records:
+        if 'quizzes' in record:
+            quiz_total = sum(record['quizzes'])
+            total_quizzes = len(record['quizzes'])
+            record['quiz_average'] = quiz_total / total_quizzes
+        else:
+            record['quiz_average'] = 0
+
+
 def main():
     student_records = []  # initial list of dictionaries
 
@@ -37,12 +48,15 @@ def main():
     print(f'\n2) Students: {student_records}')
 
     number_quizzes = 3
-    set_student_quizzes(student_records, number_quizzes)    
-    print(f'\n3) Students: {student_records}')  
+    set_student_quizzes(student_records, number_quizzes)
+    print(f'\n3) Students: {student_records}')
 
     number_quizzes = 1
-    set_student_quizzes(student_records, number_quizzes)    
-    print(f'\n4) Students: {student_records}')  
+    set_student_quizzes(student_records, number_quizzes)
+    print(f'\n4) Students: {student_records}')
+
+    calculate_quiz_average(student_records)
+    print(f'\n5) Students: {student_records}')
 
 
 if __name__ == '__main__':
