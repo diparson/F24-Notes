@@ -36,6 +36,15 @@ def calculate_quiz_average(student_records):
             record['quiz_average'] = 0
 
 
+def display_student_records(student_records):
+    print('Student Records:')
+    for record in student_records:
+        print(f"\nStudent ID: {record['student_id']}")
+        if 'quizzes' in record:
+            print(f"Quizzes: {record['quizzes']}")
+            print(f"Quiz Average: {record['quiz_average']}")
+
+
 def main():
     student_records = []  # initial list of dictionaries
 
@@ -57,6 +66,13 @@ def main():
 
     calculate_quiz_average(student_records)
     print(f'\n5) Students: {student_records}')
+
+    display_student_records(student_records)
+
+    # Display second record
+    print(f'\nSecond Record: {student_records[1]}')
+    # Display second record, third quiz score
+    print(f"\nSecond Record: {student_records[1]['quizzes'][2]}")
 
 
 if __name__ == '__main__':
