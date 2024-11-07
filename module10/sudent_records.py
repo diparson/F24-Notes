@@ -15,6 +15,15 @@ def set_students_id(student_records, number):
         student_records.append(record)
 
 
+def set_student_quizzes(student_records, number_quizzes):
+    for record in student_records:  # loop over a list of dictionaries
+        # Check if the key 'quizzes' exists in the dictionary
+        if 'quizzes' not in record:
+            record['quizzes'] = []  # create empty list
+        # Add random quiz scores to the list
+        for _ in range(number_quizzes):
+            record['quizzes'].append(random.randint(50, 100))
+
 
 def main():
     student_records = []  # initial list of dictionaries
@@ -22,6 +31,18 @@ def main():
     student_number = 5
     set_students_id(student_records, student_number)
     print(f'1) Students: {student_records}')
+
+    student_number = 1
+    set_students_id(student_records, student_number)
+    print(f'\n2) Students: {student_records}')
+
+    number_quizzes = 3
+    set_student_quizzes(student_records, number_quizzes)    
+    print(f'\n3) Students: {student_records}')  
+
+    number_quizzes = 1
+    set_student_quizzes(student_records, number_quizzes)    
+    print(f'\n4) Students: {student_records}')  
 
 
 if __name__ == '__main__':
