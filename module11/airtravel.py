@@ -4,8 +4,18 @@ Model for aircraft flights
 
 
 class Flight:
-    pass
-
+    # Define initializer method or constructor
+    # This is called when an object is created
+    def __init__(self, number):
+        # Define instance variables
+        self._number = number
+    
+    # Functions inside classes are called methods
+    # This is also called a "getter" method
+    # First parameter MUST be 'self' is a reference to 
+    # the object that is being created
+    def number(self):
+        return self._number
 
 def main():
     pass
