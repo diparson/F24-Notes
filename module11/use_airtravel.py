@@ -11,6 +11,8 @@ def main():
     print(f'Flight number {f1.number()}')
     f2 = Flight('DL123') # use parentheses to call the constructor
     print(f'Flight number {f2.number()}')
+    f2.set_number('DL456')
+    print(f'Flight number {f2.number()}')
 
 
 if __name__ == '__main__':

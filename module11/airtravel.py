@@ -17,6 +17,11 @@ class Flight:
     def number(self):
         return self._number
 
+    # This is also called a "setter" method
+    def set_number(self, number):
+        self._number = number   
+
+
 def main():
     pass
 
