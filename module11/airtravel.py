@@ -38,6 +38,14 @@ class Flight:
         self._number = self._validate_flight_number(number)
 
 
+class Aircraft:
+    def __init__(self, registration, model, num_rows, num_seats_per_row):
+        self._registration = registration
+        self._model = model
+        self._num_rows = num_rows
+        self._num_seats_per_row = num_seats_per_row
+
+
 def main():
     pass
 
